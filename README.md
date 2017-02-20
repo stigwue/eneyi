@@ -1,6 +1,6 @@
-# iriki-proxy
+# Eneyi
 
-iriki-proxy is a simple PHP application to forward on requests to an iriki application.
+Eneyi is a simple PHP application to forward on requests to an endpoint.
 
 
 ## Parameters
