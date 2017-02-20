@@ -13,11 +13,11 @@
     'data' => $data,
     //'auth'
     //headers
+    'url' => BASE_URL + $url
   );
 
   switch ($method)
   {
-    //PUT
     //DELETE
 
     case 'POST':
@@ -37,7 +37,7 @@
 
   try
   {
-    $response = $client->request($method, $url,
+    $response = $client->request($method, $request['url'],
       [
         $request['parameter'] => $request['data'],
         //'auth'

@@ -13,13 +13,12 @@ cd fake_api && composer install
 ```
 ### 3. Configure
 ```
-nano config.php #URL value
+nano config.php #BASE_URL value
 ```
 
 ### Launch
 
 Carry on with your application! See parameters for details.
-
 
 ## Parameters
 
@@ -34,7 +33,7 @@ The HTTP request method to make. This will be deduced from the request made to t
 
 ### URL
 
-Destination URL is a constant provided in file *config.php*.
+Destination URL is appended to BASE_URL, a constant defined in file *config.php*.
 
 ### Data
 

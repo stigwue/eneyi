@@ -1,12 +1,14 @@
 <?php
 
-  const URL = 'http://foo.bar';
+  const BASE_URL = 'http://foo.bar/';
 
   $method = $_SERVER['REQUEST_METHOD'];
-  $url = URL;
-
+  $url = (isset($_REQUEST['url']) ? $_REQUEST['url'] : '');
+  //$auth = (isset($_REQUEST['auth']) ? $_REQUEST['auth'] : null);
+  //$headers = (isset($_REQUEST['headers']) ? $_REQUEST['headers'] : null);
   $data = null;
 
+  //pick data
   switch ($method)
   {
     case 'POST':
@@ -22,8 +24,6 @@
     break;
   }
 
-  //$auth = (isset($_REQUEST['auth']) ? $_REQUEST['auth'] : null);
-  //$headers = (isset($_REQUEST['headers']) ? $_REQUEST['headers'] : null);
 
 
 ?>
