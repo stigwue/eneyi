@@ -2,33 +2,43 @@
 
 Eneyi is a simple PHP application to forward on requests to an endpoint.
 
-## Parameters
-
-### Provided
-
-*Headers*
-
-*Auth*
-
-Authorization parameters to be used.
-
-### Deduced
-
-*Method*
-
-The HTTP request method to make. Will be deduced from
-
-```php
-$_SERVER['REQUEST_METHOD']
+## Setup
+### 1. Clone
+```
+git clone https://github.com/stigwue/eneyi.git fake_api
+```
+### 2. Composer
+```
+cd fake_api && composer install
+```
+### 3. Configure
+```
+nano config.php #URL value
 ```
 
-*URL*
+### Launch
 
-Constant provided in file *config.php*.
+Carry on with your application! See parameters for details.
 
-*Data*
 
-The data forwarded on to the destination.
+## Parameters
+
+### Headers
+
+### Auth
+Authorization parameters to be used.
+
+### Method
+
+The HTTP request method to make. This will be deduced from the request made to the proxy. A GET will be forwarded on as a GET. Same with POSTs.
+
+### URL
+
+Destination URL is a constant provided in file *config.php*.
+
+### Data
+
+The data forwarded on to the destination are the parameters provided to the proxy, save for authentication and headers.
 
 ## Supported requests
 
