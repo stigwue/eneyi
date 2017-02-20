@@ -1,23 +1,10 @@
 <?php
 
-require_once(__DIR__ . '/vendor/autoload.php');
+  require_once(__DIR__ . '/config.php');
+  require_once(__DIR__ . '/vendor/autoload.php');
 
-use GuzzleHttp\Client;
+  use GuzzleHttp\Client;
 
-//the purpose is to receive requests with METHOD, URL AND DATA,
-//make the request and return the response
-
-$method = (isset($_REQUEST['method']) ? $_REQUEST['method'] : 'POST');
-$url = (isset($_REQUEST['url']) ? $_REQUEST['url'] : null);
-$data = (isset($_REQUEST['data']) ? $_REQUEST['data'] : null);
-
-$auth = (isset($_REQUEST['auth']) ? $_REQUEST['auth'] : null);
-$headers = (isset($_REQUEST['headers']) ? $_REQUEST['headers'] : null);
-
-//var_dump(compact('method', 'url', 'data'));
-
-if (!is_null($url))
-{
   $client = new Client();
   $response = null;
 
@@ -25,6 +12,7 @@ if (!is_null($url))
     'parameter' => '',
     'data' => $data,
     //'auth'
+    //headers
   );
 
   switch ($method)
@@ -36,18 +24,24 @@ if (!is_null($url))
       $request['parameter'] = 'form_params';
     break;
 
+    /*case 'PUT':
+    break;*/
+
     default: //GET
       $request['parameter'] = 'query';
     break;
   }
 
+  //debug
+  //var_dump(compact('url', 'method', 'data'));
 
   try
   {
     $response = $client->request($method, $url,
       [
         $request['parameter'] => $request['data'],
-
+        //'auth'
+        //'headers'
       ]
     );
   }
@@ -55,16 +49,14 @@ if (!is_null($url))
   {
     $response = null;
   }
-}
 
-if (!is_null($response))
-{
-  echo ((string) $response->getBody());
-}
-else
-{
-  echo ('{}');
-}
-
+  if (!is_null($response))
+  {
+    echo ((string) $response->getBody());
+  }
+  else
+  {
+    echo ('{}');
+  }
 
 ?>

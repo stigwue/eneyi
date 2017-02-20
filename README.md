@@ -2,23 +2,34 @@
 
 Eneyi is a simple PHP application to forward on requests to an endpoint.
 
-
 ## Parameters
 
-### Method
+### Provided
 
-The HTTP request method to make. Currently supports POSTs and GETs.
+*Headers*
 
-### URL
+*Auth*
 
-The destination url to make requests to.
+Authorization parameters to be used.
 
-### Data
+### Deduced
+
+*Method*
+
+The HTTP request method to make. Will be deduced from
+
+```php
+$_SERVER['REQUEST_METHOD']
+```
+
+*URL*
+
+Constant provided in file *config.php*.
+
+*Data*
 
 The data forwarded on to the destination.
 
-### Headers
+## Supported requests
 
-### Auth
-
-Authorization parameters to be used.
+Eneyi supports GETs and POSTs. PUTs, not yet.
