@@ -1,62 +1,24 @@
 <?php
 
   require_once(__DIR__ . '/config.php');
-  require_once(__DIR__ . '/vendor/autoload.php');
 
-  use GuzzleHttp\Client;
+  require_once(__DIR__ . '/eneyi.php');
 
-  $client = new Client();
-  $response = null;
+  //initialize
+  $destination = eneyi\eneyi::initialize();
 
-  $request = array(
-    'parameter' => '',
-    'data' => $data,
-    //'auth'
-    //headers
-    'url' => BASE_URL + $url
-  );
+  //parse
+  $parameters = eneyi\eneyi::parse_parameters();
 
-  switch ($method)
+  //forward on
+  $response = eneyi\eneyi::make_request($parameters);
+
+
+  if (eneyi\eneyi::get_parameters()['debug'])
   {
-    //DELETE
-
-    case 'POST':
-      $request['parameter'] = 'form_params';
-    break;
-
-    /*case 'PUT':
-    break;*/
-
-    default: //GET
-      $request['parameter'] = 'query';
-    break;
+    var_dump(compact('destination', 'parameters', 'response'));
   }
 
-  //debug
-  //var_dump(compact('url', 'method', 'data'));
-
-  try
-  {
-    $response = $client->request($method, $request['url'],
-      [
-        $request['parameter'] => $request['data'],
-        //'auth'
-        //'headers'
-      ]
-    );
-  }
-  catch (Exception $e)
-  {
-    $response = null;
-  }
-
-  if (!is_null($response))
-  {
-    echo ((string) $response->getBody());
-  }
-  else
-  {
-    echo ('{}');
-  }
+  echo $response;
 
 ?>

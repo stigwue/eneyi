@@ -22,7 +22,10 @@ Carry on with your application! See parameters for details.
 
 ## Parameters
 
+Note that Eneyi, as a proxy, will assume that parameters with a *__* prefix is solely for it and will strip them from the onward parameters.
+
 ### Headers
+Any desired headers to be used for the request.
 
 ### Auth
 Authorization parameters to be used.
@@ -33,12 +36,16 @@ The HTTP request method to make. This will be deduced from the request made to t
 
 ### URL
 
-Destination URL is appended to BASE_URL, a constant defined in file *config.php*.
+Destination URL is appended to BASE_URL, a constant defined in file *config.php*. You might set BASE_URL to an empty string and define URL per request.
 
 ### Data
 
-The data forwarded on to the destination are the parameters provided to the proxy, save for authentication and headers.
+The data forwarded on to the destination are the parameters provided to the proxy, save for *__* prefixed ones.
 
 ## Supported requests
 
-Eneyi supports GETs and POSTs. PUTs, not yet.
+Eneyi supports GETs and POSTs. PUTs and DELETEs, not yet.
+
+## TODO
+
+Add support for PUT and DELETE requests. Add some phpunit testing.
