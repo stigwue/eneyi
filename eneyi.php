@@ -57,19 +57,25 @@ class eneyi
     $params_from = null;
 
     //pick data
-    switch (Self::$_parameters['method'])
+    switch (strtolower(Self::$_parameters['method']))
     {
-      case 'POST':
+      case 'post':
         //loop through $_POST, drop all __* data
         $params_to = array();
         $params_from = &$_POST;
       break;
 
-      /*case 'PUT':
-        parse_str(file_get_contents("php://input"), $data);
-      break;*/
+      /*
+      case 'put':
+        parse_str(file_get_contents("php://input"), $params_from);
+      break;
 
-      default: //GET
+      case 'delete':
+        //handle some way?
+      break;
+      */
+
+      default: //get
         $params_to = array();
         $params_from = &$_GET;
       break;
@@ -94,16 +100,19 @@ class eneyi
 
   public static function make_request(&$params_to)
   {
-    switch (Self::$_parameters['method'])
+    switch (strtolower(Self::$_parameters['method']))
     {
-      //DELETE
-
-      case 'POST':
+      case 'post':
         $request['parameter'] = 'form_params';
       break;
 
-      /*case 'PUT':
-      break;*/
+      /*
+      case 'put':
+      break;
+
+      case 'delete':
+      break;
+      */
 
       default: //GET
         $request['parameter'] = 'query';
