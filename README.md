@@ -5,11 +5,11 @@ Eneyi is a simple PHP application to forward on requests to an endpoint.
 ## Setup
 ### 1. Clone
 ```
-git clone https://github.com/stigwue/eneyi.git fake_api
+git clone https://github.com/stigwue/eneyi.git
 ```
 ### 2. Composer
 ```
-cd fake_api && composer install
+cd eneyi && composer install
 ```
 ### 3. Configure
 ```
