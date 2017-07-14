@@ -24,23 +24,21 @@ Carry on with your application! See parameters for details.
 
 Note that Eneyi, as a proxy, will assume that parameters with a *__* prefix is solely for it and will strip them from the onward parameters.
 
-### Headers
-Any desired headers to be used for the request.
+### url (__url)
 
-### Auth
-Authorization parameters to be used.
+Destination URL is appended to *BASE_URL*, a constant defined in *config.php*. You might set BASE_URL to an empty string and define URL per request.
 
-### Method
+### authorization (__authorization)
 
-The HTTP request method to make. This will be deduced from the request made to the proxy. A GET will be forwarded on as a GET. Same with POSTs.
+**Not yet implemented**. Authorization parameters to be used.
 
-### URL
+### method (__method)
 
-Destination URL is appended to BASE_URL, a constant defined in file *config.php*. You might set BASE_URL to an empty string and define URL per request.
+The HTTP request method to make. This can also be deduced from the request made to the proxy: a GET will be forwarded on as a GET. Same with POSTs.
 
 ### Data
 
-The data forwarded on to the destination are the parameters provided to the proxy, save for *__* prefixed ones.
+The data forwarded on to the destination are the parameters provided to the proxy, save for *__* prefixed ones. This includes headers. Note that a POST request will read supplied POST parameters. Same goes for a GET.
 
 ## Supported requests
 
@@ -48,4 +46,10 @@ Eneyi supports GETs and POSTs. PUTs and DELETEs, not yet.
 
 ## TODO
 
-Add support for PUT and DELETE requests. Add some phpunit testing.
+- Add support for PUT requests.
+
+- Add support for DELETE requests.
+
+- Add support for authorization? Or allowed to be supplied as header?
+
+- Add some phpunit testing?

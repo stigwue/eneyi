@@ -10,6 +10,7 @@ use GuzzleHttp\Client;
 
 class eneyi
 {
+  private static $_headers = array();
   private static $_parameters = null;
 
   //stackoverflow, saving lives since 1960
@@ -18,6 +19,16 @@ class eneyi
   {
        $length = strlen($needle);
        return (substr($haystack, 0, $length) === $needle);
+  }
+
+  public static function get_headers()
+  {
+    return Self::$_headers;
+  }
+
+  public static function get_authorization()
+  {
+    return Self::$_parameters['authorization'];
   }
 
   public static function get_parameters()
@@ -33,10 +44,9 @@ class eneyi
     //using the __ prefix
 
     Self::$_parameters = array(
+      'authorization' => BASE_URL . (isset($_REQUEST['__authorization']) ? $_REQUEST['__authorization'] : ''),
       'method' => (isset($_REQUEST['__method']) ? $_REQUEST['__method'] : $_SERVER['REQUEST_METHOD']),
       'url' => BASE_URL . (isset($_REQUEST['__url']) ? $_REQUEST['__url'] : ''),
-      'auth' => (isset($_REQUEST['__auth']) ? $_REQUEST['__auth'] : null),
-      'headers' => (isset($_REQUEST['__headers']) ? $_REQUEST['__headers'] : null),
 
       'debug' => (isset($_REQUEST['__debug'])),
       'destination' => '',
@@ -51,12 +61,21 @@ class eneyi
 
   }
 
+  public static function parse_headers()
+  {
+      Self::$_headers = getallheaders();
+      
+      return Self::$_headers;
+  }
+
   public static function parse_parameters()
   {
     $params_to = null;
     $params_from = null;
 
     //pick data
+    //now, there might be a bit of a problem
+    //we may want to send a GET on but with POSTed data
     switch (strtolower(Self::$_parameters['method']))
     {
       case 'post':
@@ -67,11 +86,14 @@ class eneyi
 
       /*
       case 'put':
-        parse_str(file_get_contents("php://input"), $params_from);
+        $params_to = array();
+        //parse_str(file_get_contents("php://input"), $params_from);
+        //var_dump($params_from);
       break;
 
       case 'delete':
         //handle some way?
+        $params_to = array();
       break;
       */
 
@@ -98,7 +120,7 @@ class eneyi
     return $params_to;
   }
 
-  public static function make_request(&$params_to)
+  public static function make_request(&$params_to, &$headers_to = array())
   {
     switch (strtolower(Self::$_parameters['method']))
     {
@@ -128,8 +150,8 @@ class eneyi
       $response = $client->request(Self::$_parameters['method'], Self::$_parameters['url'],
         [
           $request['parameter'] => $params_to,
+          'headers' => $headers_to
           //'auth'
-          //'headers'
         ]
       );
     }
