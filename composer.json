@@ -1,4 +1,12 @@
 {
+   "name": "stigwue/eneyi",
+   "description": "Simple PHP proxy to forward on HTTP requests to an endpoint.",
+   "keywords": [
+        "proxy",
+        "http",
+	"requests"
+    ],
+    "license": "MIT",
     "require": {
         "guzzlehttp/guzzle": "~6.0"
     }
